@@ -1,0 +1,40 @@
+<html>
+    <head>
+    <title>Login</title>
+    <script>
+	function add(){
+    	var a = document.getElementById('1').value;
+		var b = document.getElementById('2').value;
+		var c = document.getElementById('3').value;
+		var d = document.getElementById('4').value;
+		
+		localStorage.setItem('set_a',a);
+		localStorage.setItem('set_b',b);
+		localStorage.setItem('set_c',c);
+		localStorage.setItem('set_d',d);	
+	}
+    </script>
+    </head>
+<body>
+     <h1>Table</h1>
+        <form>
+            <input type="text" id="1"/>
+            <input type="text" id="2"/>
+            <input type="text" id="3"/>
+            <input type="text" id="4"/>
+            <input type="submit" onClick="add();" value="Submit"/>
+        </form>
+        <table id="table" border="1" width="800" align="center">
+        <tr align="center">
+        <script>
+			var a1 = localStorage.getItem('set_a');
+			var b1 = localStorage.getItem('set_b');
+			var c1 = localStorage.getItem('set_c');
+			var d1 = localStorage.getItem('set_d');
+        	document.write("<td>" + a1 + "</td>" +"<td>" + b1 + "</td>"+"<td>" + c1 + "</td>"+"<td>" + d1 + "</td>");
+			</script>
+        </tr>
+        </table>
+
+    </body>
+</html>

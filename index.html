@@ -2,22 +2,23 @@
     <head>
     <title>Login</title>
     <script>
-	function add(){
-    	var a = document.getElementById('1').value;
+    var ls = JSON.parse(localStorage.getItem("items")) || []; // first Made localStorage array. agr localstorage.length == 0 is var men  [] save hoga else localstorage men items ki jo array he wo. localstorage sirf string values support krta he to humne array ko string men convert kara k localstorage men save karaya then hamen items get krne hen to wapis items ko array bnanay k liye JSON.parse(); use kiya..
+	function add(){ //function bnaya items add krne k liye
+        var arr = ls; // new var bnaya bcoz hamen item over write nh krne add krne hen
+    	var a = document.getElementById('1').value;  // saari input fields get ki
 		var b = document.getElementById('2').value;
 		var c = document.getElementById('3').value;
-		var d = document.getElementById('4').value;
-		
-		localStorage.setItem('set_a',a);
-		localStorage.setItem('set_b',b);
-		localStorage.setItem('set_c',c);
-		localStorage.setItem('set_d',d);	
+		var d = document.getElementById('4').value;  
+        arr.unshift([a,b,c,d]); // arr men input fields ki value as array unshift karayi coz jo new list bane wo top pe rahe
+        localStorage.setItem("items",JSON.stringify(arr)); // localstorage men item set kiya q k hamare pass array thi to array ko string men convert krne k liye JSON.stringify() use kiya.
+  
+        update(); //table update krne k liye yahan pe update() call kiya jo k line no 40 pe bnaya he
 	}
     </script>
     </head>
 <body>
      <h1>Table</h1>
-        <form>
+        <form action="javascript:void(0)">
             <input type="text" id="1"/>
             <input type="text" id="2"/>
             <input type="text" id="3"/>
@@ -25,7 +26,7 @@
             <input type="submit" onClick="add();" value="Submit"/>
         </form>
         <table id="table" border="1" width="800" align="center">
-        <tr align="center">
+<!--         <tr align="center">
         <script>
 			var a1 = localStorage.getItem('set_a');
 			var b1 = localStorage.getItem('set_b');
@@ -34,7 +35,15 @@
         	document.write("<td>" + a1 + "</td>" +"<td>" + b1 + "</td>"+"<td>" + c1 + "</td>"+"<td>" + d1 + "</td>");
 			</script>
         </tr>
-        </table>
-
+ -->        </table>
+        <script type="text/javascript">
+            function update(){ // update function bnaya table rows generate krne k liye.
+            document.getElementById("table").innerHTML = ""; // remove all rows in table element bcoz baar saari items ki row generate krde raha tha
+                for(var i =0; i < ls.length; i++){
+                    document.getElementById("table").innerHTML += "<tr align='center'><td>" + ls[i][0] + "</td>" +"<td>" + ls[i][1] + "</td>"+"<td>" + ls[i][2] + "</td>"+"<td>" + ls[i][3] + "</td></tr>";
+                }
+            }
+            update();
+        </script>
     </body>
 </html>
